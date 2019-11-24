@@ -14,6 +14,7 @@ func main() {
 func RegisterHandlers() *httprouter.Router {
 	router := httprouter.New()
 	router.POST("/user", CreateUser)
+	router.POST("/user/:user_name", Login)
 
 	return router
 }
@@ -22,4 +23,5 @@ func RegisterHandlers() *httprouter.Router {
 //(base) eiger@eiger-ThinkPad-X1-Carbon-3rd:~/gopath-default/src/github.com/azd1997/go-video$ curl -X POST localhost:8000/user
 //Create User Handler
 
-
+//(base) eiger@eiger-ThinkPad-X1-Carbon-3rd:~/gopath-default/src/github.com/azd1997/go-video$ curl -X POST localhost:8000/user/eiger
+//eiger
