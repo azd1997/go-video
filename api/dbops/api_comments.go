@@ -25,7 +25,7 @@ func AddNewComment(vid string, aid int, content string) error {
 	return nil
 }
 
-func ListComments(vid string, from, to int) ([]*defs.Comments, error) {
+func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
 
 	stmtOut, err := dbConn.Prepare(`SELECT comments.id, users.login_name, comments.content FROM comments
 												INNER JOIN users ON comments.author_id = users.id
@@ -36,7 +36,7 @@ func ListComments(vid string, from, to int) ([]*defs.Comments, error) {
 	}
 	defer stmtOut.Close()
 
-	var res []*defs.Comments
+	var res []*defs.Comment
 
 	rows, err := stmtOut.Query(vid, from, to)
 	if err != nil {
@@ -44,12 +44,12 @@ func ListComments(vid string, from, to int) ([]*defs.Comments, error) {
 	}
 
 	var id, authorName, content string
-	var c *defs.Comments
+	var c *defs.Comment
 	for rows.Next() {
 		if err := rows.Scan(&id, &authorName, &content); err != nil {
 			return res, nil
 		}
-		c = &defs.Comments{
+		c = &defs.Comment{
 			Id:      id,
 			VideoId: vid,
 			Author:  authorName,
