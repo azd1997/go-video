@@ -22,12 +22,12 @@ func AddNewVideo(aid int, name string) (*defs.VideoInfo, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer stmtIns.Close()
 
 	_, err = stmtIns.Exec(vid, aid, name, ctime)
 	if err != nil {
 		return nil, err
 	}
-	defer stmtIns.Close()
 
 	res := &defs.VideoInfo{
 		Id:           vid,
@@ -45,6 +45,7 @@ func GetVideoInfo(vid string) (*defs.VideoInfo, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer stmtOut.Close()
 
 	var aid int
 	var displayCTime, videoName string
@@ -56,7 +57,6 @@ func GetVideoInfo(vid string) (*defs.VideoInfo, error) {
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
-	defer stmtOut.Close()
 
 	res := &defs.VideoInfo{
 		Id:           vid,
@@ -74,12 +74,12 @@ func DeleteVideo(vid string) error {
 	if err != nil {
 		return err
 	}
+	defer stmtDel.Close()
 
 	_, err = stmtDel.Exec(vid)
 	if err != nil {
 		return err
 	}
-	defer stmtDel.Close()
 
 	return nil
 }

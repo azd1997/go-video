@@ -14,12 +14,12 @@ func AddUserCredential(loginName string, pwd string) error {
 	if err != nil {
 		return err
 	}
+	defer stmtIns.Close()
 
 	stmtIns.Exec(loginName, pwd)
 	if err != nil {
 		return err
 	}
-	defer stmtIns.Close()
 
 	return nil
 }
@@ -32,6 +32,7 @@ func GetUserCredential(loginName string) (string, error) {
 		log.Printf("%s", err)
 		return "", err
 	}
+	defer stmtOut.Close()
 	
 	var pwd string
 	stmtOut.QueryRow(loginName).Scan(&pwd)
@@ -39,7 +40,6 @@ func GetUserCredential(loginName string) (string, error) {
 												// 但它其实是数据库没有该条记录我们应该额外在业务层面处理
 		return "", err
 	}
-	defer stmtOut.Close()
 	
 	return pwd, nil
 }
@@ -50,12 +50,12 @@ func DeleteUserCredential(loginName string, pwd string) error {
 		log.Printf("%s", err)
 		return err
 	}
+	defer stmtDel.Close()
 	
 	stmtDel.Exec(loginName, pwd)
 	if err != nil {
 		return err
 	}
-	defer stmtDel.Close()
 
 	return nil
 }
