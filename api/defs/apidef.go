@@ -6,4 +6,28 @@ type UserCredential struct {
 	Pwd string `json:"pwd"`
 }
 
+// response
+type SignedUp struct {
+	Success bool `json:"success"`
+	SessionId string `json:"session_id"`
+}
 
+// data model
+type VideoInfo struct {
+	Id string
+	AuthorId int
+	Name string
+	DisplayCTime string
+}
+
+type Comment struct {
+	Id string
+	VideoId string
+	Author string
+	Content string
+}
+
+type SimpleSession struct {
+	Username string	// 登录名
+	TTL int64
+}

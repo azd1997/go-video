@@ -6,9 +6,12 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+
+
 func main() {
 	r := RegisterHandlers()
-	http.ListenAndServe(":8000", r)
+	mh := NewMiddleWareHandler(r)
+	http.ListenAndServe(":8000", mh)
 }
 
 func RegisterHandlers() *httprouter.Router {
@@ -19,9 +22,4 @@ func RegisterHandlers() *httprouter.Router {
 	return router
 }
 
-// 测试当前服务器结果
-//(base) eiger@eiger-ThinkPad-X1-Carbon-3rd:~/gopath-default/src/github.com/azd1997/go-video$ curl -X POST localhost:8000/user
-//Create User Handler
-
-//(base) eiger@eiger-ThinkPad-X1-Carbon-3rd:~/gopath-default/src/github.com/azd1997/go-video$ curl -X POST localhost:8000/user/eiger
-//eiger
+// main -> middlerware -> defs(message,err) -> handlers -> dbops -> response
