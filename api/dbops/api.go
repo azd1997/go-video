@@ -8,7 +8,7 @@ import (
 func AddUserCredential(loginName string, pwd string) error {
 	// 可以直接使用包内dbConn变量
 	
-	stmtIns, err := dbConn.Prepare("INSERT INTO users (login_name, pwd)")		// prepare 预编译
+	stmtIns, err := dbConn.Prepare("INSERT INTO users (login_name, pwd) VALUES (?, ?)")		// prepare 预编译
 	if err != nil {
 		return err
 	}
@@ -20,7 +20,7 @@ func AddUserCredential(loginName string, pwd string) error {
 func GetUserCredential(loginName string) (string, error) {
 	// 可以直接使用包内dbConn变量
 
-	stmtOut, err := dbConn.Prepare("SELECT pwd FROM users WHERE login_name=")
+	stmtOut, err := dbConn.Prepare("SELECT pwd FROM users WHERE login_name = ?")
 	if err != nil {
 		log.Printf("%s", err)
 		return "", err
@@ -33,8 +33,8 @@ func GetUserCredential(loginName string) (string, error) {
 	return pwd, nil
 }
 
-func DeleteUser(loginName string, pwd string) error {
-	stmDel, err := dbConn.Prepare("DELETE FROM users WHERE login_name=")
+func DeleteUserCredential(loginName string, pwd string) error {
+	stmDel, err := dbConn.Prepare("DELETE FROM users WHERE login_name = ? AND pwd = ?")
 	if err != nil {
 		log.Printf("%s", err)
 		return err
