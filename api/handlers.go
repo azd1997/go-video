@@ -41,7 +41,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		sendNormalResponse(w, string(resp), http.StatusCreated)		// 201
 	}
 
-
 }
 
 func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {

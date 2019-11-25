@@ -46,3 +46,9 @@ login_name VARCHAR(64)
 comments -> video_info -> users <- sessions
 
 符合第三范式，各张表没有冗余信息，这样易于扩展
+
+
+Streaming
+- 静态视频，并不是用RTMP（用于直播等的一种实时媒体协议）
+- 独立的服务
+- 功能包括streaming和upload files
