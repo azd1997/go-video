@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/julienschmidt/httprouter"
+	"html/template"
 	"io"
 	"io/ioutil"
 	"log"
@@ -57,4 +58,10 @@ func uploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	// 返回正确response
 	w.WriteHeader(http.StatusCreated)
 	io.WriteString(w, "Uploaded successfully")
+}
+
+func testPageHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	t, _ := template.ParseFiles("./videos/upload.html")
+
+	t.Execute(w, nil)
 }
