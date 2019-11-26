@@ -8,6 +8,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 )
 
 type SignInOrUpPage struct {
@@ -98,4 +100,11 @@ func apiHandler(w http.ResponseWriter, r *http.Request, params httprouter.Params
 
 	// 真正去处理api转发
 	apiRequest(apiBody, w, r)
+}
+
+
+func proxyUploadHandler(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	u, _ := url.Parse("http://127.0.0.1:9000/")	// TODO: 不建议硬编码到程序，而应该变成配置
+	proxy := httputil.NewSingleHostReverseProxy(u)		// 实现了域名转换，其他全都不动
+	proxy.ServeHTTP(w, r)
 }

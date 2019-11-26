@@ -23,6 +23,8 @@ func RegisterHandlers() *httprouter.Router {
 
 	router.POST("/api", apiHandler)		// api模式
 
+	router.POST("upload/:vid-id", proxyUploadHandler)	// proxy模式
+
 	router.ServeFiles("/statics/*filepath", http.Dir("./template"))	// 挂载文件夹
 
 	return router

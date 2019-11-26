@@ -29,6 +29,8 @@ import (
 //	}
 // 再在client.go这里用http.CLient重新构造请求发给真正的后台api
 
+// api透传不适用于原声http请求，比如我们的upload服务，就没办法这么做，所以还需要proxy
+
 
 // http.Client 的用法就是声明全局变量，调用其request方法
 var httpClient *http.Client
