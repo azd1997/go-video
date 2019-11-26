@@ -23,4 +23,32 @@
         }
     </style>
 </head>
+
+<body id="main-back">
+
+<div class="topnav">
+    <a class="active" href="#sign_in_up">Home</a>
+    <a href="#news">{{.Name}}</a>
+    <a href="#about">Help</a>
+</div>
+
+<div class="topic-back" style="padding-left: 16px">
+    <h2 id="title">Welcome to MovieDash</h2>
+</div>
+
+<form method="post" id="regsubmit" action="./home.html" style="width: 500px; margin: 0 auto;">
+    <div class="container">
+        <h1>Register</h1>
+        <hr>
+
+        <label for="username"><b>User name</b></label>
+        <input id="username" type="text" placeholder="Enter user name" name="username" required>
+
+        <label for="pwd"><b>Password</b></label>
+        <input id="pwd" type="password" placeholder="Enter password" name="pwd" required>
+
+    </div>
+</form>
+
+</body>
 </html>
