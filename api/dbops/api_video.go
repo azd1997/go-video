@@ -83,3 +83,41 @@ func DeleteVideo(vid string) error {
 
 	return nil
 }
+
+func ListVideoInfo(username string, from, to int) ([]*defs.VideoInfo, error) {
+
+	stmtOut, err := dbConn.Prepare(`SELECT video_info.id, users.login_name, video_info.name, video_info.display_ctime FROM video_info
+												INNER JOIN users ON video_info.author_id = users.id
+												WHERE video_info.author_ = ? AND 
+												video_info.create_time > FROM_UNIXTIME(?) AND video_info.create_time <= FROM_UNIXTIME(?)`)
+	if err != nil {
+		return nil, err
+	}
+	defer stmtOut.Close()
+
+	var res []*defs.VideoInfo
+
+	rows, err := stmtOut.Query(vid, from, to)
+	if err != nil {
+		return res, err
+	}
+
+	var authorId int
+	var id, name, displayCTime string
+	var vi *defs.VideoInfo
+	for rows.Next() {
+		if err := rows.Scan(&id, &authorId, &name, &displayCTime); err != nil {
+			return res, nil
+		}
+		vi = &defs.VideoInfo{
+			Id:      id,
+			AuthorId:authorId,
+			Name:name,
+			DisplayCTime:displayCTime,
+		}
+
+		res = append(res, vi)
+	}
+
+	return res, nil
+}

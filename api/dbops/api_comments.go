@@ -30,7 +30,8 @@ func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
 	stmtOut, err := dbConn.Prepare(`SELECT comments.id, users.login_name, comments.content FROM comments
 												INNER JOIN users ON comments.author_id = users.id
 												WHERE comments.video_id = ? AND 
-												comments.time > FROM_UNIXTIME(?) AND comments.time <= FROM_UNIXTIME(?)`)
+												comments.time > FROM_UNIXTIME(?) AND comments.time <= FROM_UNIXTIME(?)
+												ORDER BY comments.time DESC`)
 	if err != nil {
 		return nil, err
 	}

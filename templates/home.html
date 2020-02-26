@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #5cb85c;
+        color: white;
+    }
+
+    .modal-body {
+        padding: 2px 16px;
+    }
+
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: #5cb85c;
+        color: white;
+    }
+
+    .video-thumbnail-list {
+        padding-left: 50px;
+    }
+
+    .whole {
+        padding-left: 100px;
+        display: flex;
+    }
+
+    #comments {
+        padding-top: 20px;
+    }
+
+    #comment-author {
+        font-size: 12px;
+        color: grey;
+    }
+
+    .comment {
+        font-size: 15px;
+        color: black;
+    }
+
+    #comments-total {
+        font-size: 18px;
+        color: black;
+        line-height: 3;
+    }
+
+    #curr-video-name {
+        font-size: 18px;
+        padding-top: 10px;
+        line-height: 20px;
+    }
+
+    #curr-video-ctime {
+        font-size: 10px;
+        color: grey;
+    }
+
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    #errorbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: red;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    #errorbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    </style>
+
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/sign_in_up.js"></script>
+</head>
+
+<body id="mainback">
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#news">{{.Name}}</a>
+        <a href="#about">About</a>
+        <a href="#" id="upload" data-rel="popup">Upload</a>
+        <a href="" id="logout" href="/">Logout</a>
+    </div>
+    <div class="topic-back" style="padding-left: 16px">
+        <h2 id="title">Welcome to MOVIEDASH</h2>
+    </div>
+    <div class="whole">
+        <div id="play-box">
+            <video id="curr-video" width="640" height="400" controls preload="auto" border="5"></video>
+            <div id="curr-video-name"></div>
+            <div id="curr-video-ctime"></div>
+            <div id="snackbar">Comment submission succeed</div>
+            <div id="errorbar">Error happened</div>
+            <div id="comments">
+                <textarea id="comments-input" name="message" rows="5" cols="90" placeholder="Input your comment"></textarea>
+                <input id="submit-comment" type="submit">
+                <hr size="1" style="border-color: #ede3e1;">
+                <div id="comments-total">0 comments</div>
+                <div id="comments-history"></div>
+            </div>
+        </div>
+        <div id="terms" class="video-thumbnail-list"></div>
+    </div>
+
+    <div id="uploadvideomodal" class="modal">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Modal Header</h2>
+            </div>
+            <div class="modal-body">
+                <form id="uploadform" action="http://127.0.0.1:9000/upload/eiger" method="post"
+                      enctype="multipart/form-data" class="uploadForm">
+                    <input class="uploadForm_input" type="file" name="file" id="inputFile" accept="video/*">
+                    <input type="text" id="vname" name="video name">
+                    <input type="submit" id="upload-submit" name="submit" value="Submit">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <h3>Modal Footer</h3>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -21,6 +21,81 @@
             text-decoration: none;
             font-size: 17px;
         }
+
+        .topnav a:hover {
+            background-color: #dddddd;
+            color: black;
+        }
+
+        .topnav a:active {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .topic-back {
+            text-align: center;
+            background-color: #66ffff;
+        }
+
+        #main-back {
+            background-color: #66ffff;
+        }
+
+        #title {
+            font-size: 60px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /*为container添加padding*/
+        .container {
+            padding: 16px;
+            background-color: white;
+        }
+
+        /*全宽输入框*/
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 15px;
+            outline: none;
+        }
+
+        /*覆盖默认的hr*/
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /*提交(submit)按钮样式*/
+        .registerbtn {
+            background-color: #4caf50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            font-size: 20px;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        /*链接文字设为蓝色*/
+        a {
+            color: dodgerblue;
+        }
+
+        /*为"Sign in"设置灰色背景和文字居中*/
+        .signin {
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -46,7 +121,37 @@
 
         <label for="pwd"><b>Password</b></label>
         <input id="pwd" type="password" placeholder="Enter password" name="pwd" required>
+        <hr>
 
+        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+        <button id="regbtn" type="submit" class="registerbtn" >Register</button>
+    </div>
+
+    <div>
+        <p>Already have an account? <a id="signinhref" href="#">Sign in</a>.</p>
+    </div>
+</form>
+
+<form method="post" id="signinsubmit" action="./home.html" style="width: 500px; margin: 0 auto; display: none;">
+    <div class="container">
+        <h1>Sign In</h1>
+        <hr>
+
+        <label for="username"><b>User name</b></label>
+        <input id="susername" type="text" placeholder="Enter user name" name="username" required>
+
+        <label for="pwd"><b>Password</b></label>
+        <input id="spwd" type="password" placeholder="Enter password" name="pwd" required>
+        <hr>
+
+        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+        <button id="signinbtn" type="submit" class="registerbtn" >Sign In</button>
+    </div>
+
+    <div>
+        <p>Don't have an account? <a id="registerhref" href="#">Register</a>.</p>
     </div>
 </form>
 
